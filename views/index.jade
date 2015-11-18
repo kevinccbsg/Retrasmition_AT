@@ -1,0 +1,19 @@
+extends layout  
+block content
+    input(type="text", id="texto")
+    form
+      input(type="text", id="user")
+      input(type="submit", value="send")
+    script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+    script(src='http://code.jquery.com/jquery-1.11.1.js')
+    script.
+      var socket = io();
+      $('#texto').change(function(){
+      socket.emit('Change Text', $('#texto').val());
+      //$('#user').val('');
+      //alert('There ara changes');
+      //return false;
+      });
+      socket.on('New Text', function(msg){
+      $('#texto').val()=msg;
+      });
